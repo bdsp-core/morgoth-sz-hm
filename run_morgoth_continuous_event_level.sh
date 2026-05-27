@@ -21,7 +21,7 @@
 
 #--rewrite_results Overwrite the original results when new results are available.
 
-password="exxact@1"
+password=""
 
 # edf raw case
 dataset_dir="test_data/edf"
