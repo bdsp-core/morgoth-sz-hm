@@ -1,5 +1,28 @@
 
-# 🧠 Morgoth: Toward Automated EEG Interpretation
+# 🫀 Seizure Detection with Hard Mining and Chewing Artifact Rejection
+
+This repository extends the base **Morgoth** EEG model with two improvements specifically targeting seizure detection:
+
+## 1. Hard Mining
+
+Standard training treats all misclassified examples equally. In seizure detection, the model tends to perform poorly on a small subset of difficult cases — ambiguous ictal patterns, short seizures, and low-amplitude events. Hard mining addresses this by identifying the most frequently misclassified windows during training and up-weighting them in subsequent iterations, forcing the model to focus on the hardest examples rather than easy negatives.
+
+See `hard_mining.py` for the implementation and `train_hard_mining.sh` / `train_hard_mining_2.sh` for training scripts.
+
+## 2. Chewing Artifact Rejection (Few-Shot Learning)
+
+Chewing artifacts are a major source of false positives in automated seizure detection. Their high-frequency, rhythmic muscle activity closely mimics ictal EEG patterns, making them difficult to distinguish without additional context. Because labeled chewing artifact data is scarce, this repository uses a **few-shot learning** approach to train a lightweight auxiliary classifier that identifies and rejects chewing artifacts before seizure classification.
+
+The combined pipeline:
+```
+EEG window → Morgoth event-level features → Chewing artifact classifier → (if artifact: reject) → Seizure classifier → output
+```
+
+See `szcore.py` for the full scoring pipeline and `combine_hm_fsl_results.py` for merging hard mining and few-shot learning outputs.
+
+---
+
+# 🧠 Morgoth: Toward Automated EEG Interpretation (For Reference Only)
 
 This repository contains code and tools for running EEG analysis using **Morgoth**, including event-level and EEG-level detection with probabilities for:
 
