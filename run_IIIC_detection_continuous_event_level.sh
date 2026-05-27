@@ -37,8 +37,8 @@ rewrite_results="no"
 slipping_step_second=1
 
 # ── Checkpoints ───────────────────────────────────────────────────────────────
-HM_MODEL="checkpoints/sz_hm13_1.pth"
-CHEWING_MODEL="checkpoints/IIIC_chewing3/sz_fs_chewing.pth"
+HM_MODEL="checkpoints/IIIC_sz_hm13_1.pth"
+CHEWING_MODEL="checkpoints/IIIC_sz_hm13_3_fs.pth"
 
 # =============================================================================
 
