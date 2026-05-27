@@ -22,6 +22,56 @@ See `szcore.py` for the full scoring pipeline and `combine_hm_fsl_results.py` fo
 
 ---
 
+## 🚀 Running Inference
+
+All three modes are controlled by a single script: `run_IIIC_detection_continuous_event_level.sh`
+
+### Step 1 — Set your paths and mode
+
+Open the script and edit the top section:
+
+```bash
+# Options: hm_only | chewing_only | combined
+MODE="combined"
+
+EEG_DIR="/your/eeg/data/dir"    # directory containing input EDF files
+RESULT_DIR="/your/results/dir"  # directory where output CSVs will be saved
+
+HM_MODEL="checkpoints/sz_hm13_1.pth"
+CHEWING_MODEL="checkpoints/IIIC_chewing3/sz_fs_chewing.pth"
+```
+
+### Step 2 — Choose a mode
+
+| Mode | When to use | Checkpoint(s) used |
+|------|------------|-------------------|
+| `hm_only` | Standard IIIC classification without artifact rejection | `HM_MODEL` only |
+| `chewing_only` | Inspect chewing artifact scores in isolation | `CHEWING_MODEL` only |
+| `combined` | Clinical use — chewing artifacts suppressed before classification (recommended) | `HM_MODEL` + `CHEWING_MODEL` |
+
+### Step 3 — Run
+
+```bash
+bash run_IIIC_detection_continuous_event_level.sh
+```
+
+### Output
+
+Results are saved to `RESULT_DIR/<mode>_pred_1sStep/`, one CSV per input EDF file.
+
+Each CSV contains per-second predictions with 6 class probabilities:
+
+| Column | Class |
+|--------|-------|
+| 0 | Other |
+| 1 | Seizure |
+| 2 | LPD |
+| 3 | GPD |
+| 4 | LRDA |
+| 5 | GRDA |
+
+---
+
 # 🧠 Morgoth: Toward Automated EEG Interpretation (For Reference Only)
 
 This repository contains code and tools for running EEG analysis using **Morgoth**, including event-level and EEG-level detection with probabilities for:
