@@ -1,5 +1,5 @@
 
-# 🫀 Seizure Detection with Hard Mining and Chewing Artifact Rejection
+# 🧠 Seizure Detection with Hard Mining and Chewing Artifact Rejection
 
 This repository extends the base **Morgoth** EEG model with two improvements specifically targeting seizure detection:
 
