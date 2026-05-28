@@ -24,6 +24,17 @@ See `szcore.py` for the full scoring pipeline and `combine_hm_fsl_results.py` fo
 
 ## 🚀 Running Inference
 
+There are two levels of inference:
+
+| Level | Script | Output | When to use |
+|-------|--------|--------|-------------|
+| **Event-level** | `run_IIIC_detection_continuous_event_level.sh` | Per-second probabilities for each EEG window | Continuous monitoring, visualization |
+| **EEG-level** | `run_IIIC_detection_EEG_level.sh` | Single score per EEG recording per class | Classification of whole recordings |
+
+---
+
+### Event-level Inference
+
 All three modes are controlled by a single script: `run_IIIC_detection_continuous_event_level.sh`
 
 ### Step 1 — Set your paths and mode
@@ -69,6 +80,46 @@ Each CSV contains per-second predictions with 6 class probabilities:
 | 3 | GPD |
 | 4 | LRDA |
 | 5 | GRDA |
+
+---
+
+### EEG-level Inference
+
+EEG-level inference aggregates per-second event-level predictions into a single score per recording for each IIIC class. It runs in two steps internally.
+
+#### Step 1 — Set your paths
+
+Open `run_IIIC_detection_EEG_level.sh` and edit the top section:
+
+```bash
+EEG_DIR="/your/eeg/data/dir"    # input: directory of EDF files
+RESULT_DIR="/your/results/dir"  # output: result directories will be created here
+
+# Set to "yes" if you already ran event-level inference (MODE=hm_only)
+SKIP_EVENT_LEVEL="no"
+```
+
+#### Step 2 — Run
+
+```bash
+bash run_IIIC_detection_EEG_level.sh
+```
+
+The script automatically runs event-level inference first (Step 1), then EEG-level aggregation (Step 2) for all 5 IIIC classes. If you already have event-level results, set `SKIP_EVENT_LEVEL="yes"` to skip Step 1.
+
+#### Output
+
+Results are saved to `RESULT_DIR/<class>_EEGlevel/`, one directory per IIIC class:
+
+```
+RESULT_DIR/
+├── hm_only_pred_1sStep/        ← event-level results (Step 1)
+├── SEIZURE_EEGlevel/           ← EEG-level results per class
+├── LPD_EEGlevel/
+├── GPD_EEGlevel/
+├── LRDA_EEGlevel/
+└── GRDA_EEGlevel/
+```
 
 ---
 
