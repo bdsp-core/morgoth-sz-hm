@@ -19,7 +19,7 @@
 
 # ── Mode selector ─────────────────────────────────────────────────────────────
 # Options: hm_only | chewing_only | combined
-MODE="combined"
+MODE="hm_only"
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 EEG_DIR="/your/eeg/data/dir"       # input: directory of EDF files

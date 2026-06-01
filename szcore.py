@@ -1013,13 +1013,17 @@ if __name__ == "__main__":
 
 
     # BCH
-    result_dir = '/run/user/1000/gvfs/smb-share:server=10.35.163.17,share=data/BCH_Seizures/Morgoth_res/IIIC'
+    # result_dir = '/run/user/1000/gvfs/smb-share:server=10.35.163.17,share=data/BCH_Seizures/Morgoth_res/IIIC'
+    result_dir = '/data/seizure_hm/BCH_Seizures/Morgoth_res/IIIC'
+
     save_result_path = '/data/seizure_hm/BCH_Seizures/szcore/szcore.csv'
+
+    # figure_dir = '/run/user/1000/gvfs/smb-share:server=10.35.163.17,share=data/BCH_Seizures/Morgoth_res/IIIC/szcore_figures_all_models'
     # figure_dir = '/data/seizure_hm/BCH_Seizures/szcore/figures'
+    figure_dir = 'results/vis_bch/'
 
-    figure_dir = '/run/user/1000/gvfs/smb-share:server=10.35.163.17,share=data/BCH_Seizures/Morgoth_res/IIIC/szcore_figures_all_models'
 
-    model_names = ['SPaRcNet', 'MO1', 'HM0', 'HM1', 'HM2', 'HM3', 'HM4', 'HM5', 'HM6', 'HM7', 'HM8', 'HM9', 'HM10', 'HM11', 'HM12','HM12_post']
+    model_names = ['SPaRcNet', 'HM0', 'HM1', 'HM2', 'HM3', 'HM4', 'HM5', 'HM6', 'HM7', 'HM8', 'HM9', 'HM10', 'HM11', 'HM12', 'HM13_post', 'HM13_post']
 
     print("=" * 80)
     print("SZCORE EVALUATION WITH ROC/PR CURVES")
