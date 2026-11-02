@@ -537,4 +537,4 @@ if __name__ == "__main__":
     #             save_path=os.path.join(RESULTS_DIR, "eeglevel_results_moe.png"),
     #             n_bootstrap=100, source_filter="moe")
 
-# echo "exxact@1" | sudo -S ~/miniconda3/envs/torchenv/bin/python vis_IIIC_EEG_level_results.py
+# sudo ~/miniconda3/envs/torchenv/bin/python vis_IIIC_EEG_level_results.py
