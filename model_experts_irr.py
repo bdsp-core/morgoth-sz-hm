@@ -1816,4 +1816,4 @@ if __name__ == "__main__":
 
     pass
 
-# echo "exxact@1" | sudo -S ~/miniconda3/envs/torchenv/bin/python model_experts_irr.py
+# sudo ~/miniconda3/envs/torchenv/bin/python model_experts_irr.py

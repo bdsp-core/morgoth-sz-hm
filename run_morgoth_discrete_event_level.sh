@@ -16,10 +16,9 @@
 # nb_classes: SPIKES/NORMAL/BS 1; IIIC 6; SLOWING/FOC_GEN_SPIKES/MGBSLEEP3stages 3; SLEEPPSG 5
 # Output results will be saved in pred.csv in eval_sub_dir folder
 
-password=""
 
 ## 1. Spikes
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -32,7 +31,7 @@ password=""
 #
 #
 ## 2. Seizure+IIIC
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=2 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=2 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -45,7 +44,7 @@ password=""
 
 
 # 3. Focal Generalized Slowing
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=3 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=3 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -58,7 +57,7 @@ password=""
 
 
 # 4. Focal Generalized Spikes
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=4 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=4 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -71,7 +70,7 @@ password=""
 
 
 # 5. Burst Suppression
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=5 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=5 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -84,7 +83,7 @@ password=""
 
 
 # 6. Normal
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=6 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=6 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -97,7 +96,7 @@ password=""
 
 
 # 7. Sleep staging (5 stages; input 6 EEG channels)
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=7 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=7 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -110,7 +109,7 @@ password=""
 
 
 # 8. Sleep staging (3 stages; input 19 EEG channels)
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=8 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=8 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -122,7 +121,7 @@ password=""
 
 
 # 9. VW
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -132,7 +131,7 @@ password=""
 #            --test_data_format pkl \
 #            --eval_sub_dir /data/VW/processed_1second/test
 
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -143,7 +142,7 @@ password=""
 #            --eval_sub_dir /data/VW_SPIKES/processed_1second/test
 
 # 10.BiPD
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
             --abs_pos_emb \
             --eval \
             --model base_patch200_200 \
@@ -154,7 +153,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --eval_sub_dir /data/BIPD/test_set
 
 # 11.BIRD
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12 finetune_classification.py \
             --abs_pos_emb \
             --eval \
             --model base_patch200_200 \

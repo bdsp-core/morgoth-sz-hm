@@ -1,7 +1,7 @@
 # train seizure hm
 
 #EPOCH=5
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
 #        --output_dir checkpoints/hm_IIIC13_2 \
 #        --log_dir log/hm_IIIC13_2 \
 #        --dataset IIIC \
@@ -34,7 +34,7 @@
 #
 #
 EPOCH=20
-echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
         --output_dir checkpoints/IIIC_chewing3 \
         --log_dir log/IIIC_chewing3 \
         --dataset IIIC_chewing \
@@ -63,9 +63,9 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 # test seizure hm on test set
 #
 #new_model_round='hm_IIIC11'
-#echo "exxact@1" | sudo -S mkdir /data/seizure_hm/test_set/pred/pred_${new_model_round}/
+#sudo mkdir /data/seizure_hm/test_set/pred/pred_${new_model_round}/
 #for i in {0..19}; do
-#    echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#    sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #                --abs_pos_emb \
 #                --eval \
 #                --model base_patch200_200 \
@@ -74,14 +74,14 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #                --nb_classes 6 \
 #                --test_data_format mat \
 #                --eval_sub_dir /data/seizure_hm/test_set/sparcnet_test_mat
-#   echo "exxact@1" | sudo mv /data/seizure_hm/test_set/sparcnet_test_mat/pred.csv /data/seizure_hm/test_set/pred/pred_${new_model_round}/pred_discrete_checkpoint${i}.csv
+#   sudo mv /data/seizure_hm/test_set/sparcnet_test_mat/pred.csv /data/seizure_hm/test_set/pred/pred_${new_model_round}/pred_discrete_checkpoint${i}.csv
 #done
 #
 #
 #model_rounds=("hm_IIIC11" "hm_IIIC10" "hm_IIIC1" "hm_IIIC1_1" "hm_IIIC2" "hm_IIIC3" "hm_IIIC4" "hm_IIIC5" "hm_IIIC6" "hm_IIIC7" "hm_IIIC8_1" "hm_IIIC9")
 #for model_round in "${model_rounds[@]}"; do
 #  for j in {0..19}; do
-#        echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#        sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #                    --abs_pos_emb \
 #                    --model base_patch200_200 \
 #                    --predict \
@@ -125,7 +125,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #
 #for continuous_dir in "${continuous_dirs[@]}"; do
 #    for inx in "${inx_array[@]}"; do
-#        echo "exxact@1" | sudo -S $(which python) EEG_level_head.py \
+#        sudo $(which python) EEG_level_head.py \
 #            --mode predict \
 #            --dataset SEIZURE \
 #            --task_model ../EEGfounder/checkpoints/SEIZURE_EEGlevel.pth \
@@ -134,7 +134,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #    done
 #done
 
-#echo "exxact@1" | sudo -S $(which python) EEG_level_head.py \
+#sudo $(which python) EEG_level_head.py \
 #            --mode predict \
 #            --dataset SEIZURE \
 #            --task_model ../EEGfounder/checkpoints/SEIZURE_EEGlevel.pth \
@@ -142,7 +142,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #            --result_dir /data/seizure_hm/test_set/pred/pred_hm_post/pred_EEGlevel
 #
 #
-#echo "exxact@1" | sudo -S $(which python) EEG_level_head.py \
+#sudo $(which python) EEG_level_head.py \
 #            --mode predict \
 #            --dataset SEIZURE \
 #            --task_model ../EEGfounder/checkpoints/SEIZURE_EEGlevel.pth \
@@ -153,7 +153,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 
 # run on all edf raw data
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -194,7 +194,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 
 
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=57 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=57 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -212,7 +212,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #            --rewrite_results no
 #
 #
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=57 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=57 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -231,7 +231,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 
 ## test seizure hm chewing
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -250,7 +250,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #            --rewrite_results no
 
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1234 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -272,7 +272,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 
 
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \
@@ -283,7 +283,7 @@ echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 ~/miniconda3/envs/torchenv/bin/pytho
 #            --eval_sub_dir /data/seizure_hm/test_set/sparcnet_test_mat
 
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model base_patch200_200 \

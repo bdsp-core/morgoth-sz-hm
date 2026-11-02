@@ -26,7 +26,6 @@ EEG_DIR="/your/eeg/data/dir"       # input: directory of EDF files
 RESULT_DIR="/your/results/dir"     # output: per-subject result folders
 
 # ── Shared parameters ─────────────────────────────────────────────────────────
-password=""
 data_format="edf"
 sampling_rate=0
 already_format_channel_order="no"
@@ -47,7 +46,7 @@ if [ "$MODE" = "hm_only" ]; then
     # Output classes: Other / Seizure / LPD / GPD / LRDA / GRDA
     # Uses standard IIIC dataset pipeline (no chewing artifact rejection)
     echo "Mode: hm_only  |  model: ${HM_MODEL}"
-    echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) \
+    sudo OMP_NUM_THREADS=1 $(which python) \
         -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 \
         finetune_classification.py \
             --abs_pos_emb \
@@ -71,7 +70,7 @@ elif [ "$MODE" = "chewing_only" ]; then
     # Useful to inspect chewing artifact rejection scores in isolation
     # before combining with the HM IIIC model
     echo "Mode: chewing_only  |  model: ${CHEWING_MODEL}"
-    echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) \
+    sudo OMP_NUM_THREADS=1 $(which python) \
         -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 \
         finetune_classification.py \
             --abs_pos_emb \
@@ -96,7 +95,7 @@ elif [ "$MODE" = "combined" ]; then
     # chewing artifact are suppressed before IIIC classification.
     # Output classes: Other / Seizure / LPD / GPD / LRDA / GRDA
     echo "Mode: combined  |  HM model: ${HM_MODEL}  |  chewing model: ${CHEWING_MODEL}"
-    echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) \
+    sudo OMP_NUM_THREADS=1 $(which python) \
         -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 \
         finetune_classification.py \
             --abs_pos_emb \

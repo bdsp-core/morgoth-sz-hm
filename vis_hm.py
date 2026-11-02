@@ -2489,4 +2489,4 @@ if __name__ == "__main__":
     print("All processing complete!")
     print(f"{'=' * 50}")
 
-# echo "exxact@1" | sudo -S ~/miniconda3/envs/torchenv/bin/python vis_hm.py
+# sudo ~/miniconda3/envs/torchenv/bin/python vis_hm.py

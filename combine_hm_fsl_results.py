@@ -280,4 +280,4 @@ if __name__ == "__main__":
 
 
 
-# echo "exxact@1" | sudo -S ~/miniconda3/envs/torchenv/bin/python combine_hm_fsl_results.py
+# sudo ~/miniconda3/envs/torchenv/bin/python combine_hm_fsl_results.py

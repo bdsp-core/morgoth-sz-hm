@@ -2,7 +2,7 @@
 ####### make event level resulst ################
 
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -40,7 +40,7 @@
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
 
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -57,7 +57,7 @@
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
 #
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -73,7 +73,7 @@
 #            --eval_results_dir "/data/IIIC_EEG_level/event_res/SEIZURE_segments_raw" \
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -89,7 +89,7 @@
 #            --eval_results_dir "/data/IIIC_EEG_level/event_res/SEIZURE_BCH_segments_raw" \
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -106,7 +106,7 @@
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
 #
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -122,7 +122,7 @@
 #            --eval_results_dir "/data/IIIC_EEG_level/event_res/GPD_segments_raw" \
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -139,7 +139,7 @@
 #            --prediction_slipping_step_second 1 \
 #            --rewrite_results no
 #
-#echo "exxact@1" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
 #            --abs_pos_emb \
 #            --model base_patch200_200 \
 #            --predict \
@@ -163,7 +163,7 @@
 #num_epochs=10
 #IIIC_datasets=("GRDA" "GPD" "LPD") # "SEIZURE" "LRDA" "GRDA"
 #for IIIC_dataset in "${IIIC_datasets[@]}"; do
-#  echo "exxact@1" | sudo -S  $(which python) EEG_level_head.py \
+#  sudo $(which python) EEG_level_head.py \
 #          --mode train \
 #          --dataset ${IIIC_dataset} \
 #          --train_csv_dirs "/data/IIIC_EEG_level/event_res/SEIZURE_segments_raw /data/IIIC_EEG_level/event_res/SEIZURE_BCH_segments_raw /data/IIIC_EEG_level/event_res/LPD_segments_raw /data/IIIC_EEG_level/event_res/GPD_segments_raw /data/IIIC_EEG_level/event_res/LRDA_segments_raw /data/IIIC_EEG_level/event_res/GRDA_segments_raw /data/IIIC_EEG_level/event_res/representative_res /data/IIIC_EEG_level/event_res/IIIC_segments_raw /data/IIIC_EEG_level/event_res/MoE_segments_raw /data/IIIC_EEG_level/event_res/GLAD_segments_raw" \
@@ -201,7 +201,7 @@ dataset_dirs=(
 
 #for IIIC_dataset in "${IIIC_datasets[@]}"; do
 #    for dataset_dir in "${dataset_dirs[@]}"; do
-#        echo "exxact@1" | sudo -S $(which python) EEG_level_head.py \
+#        sudo $(which python) EEG_level_head.py \
 #            --mode predict \
 #            --dataset ${IIIC_dataset} \
 #            --task_model checkpoints/morgoth/${IIIC_dataset}_EEGlevel_2.pth \
@@ -214,7 +214,7 @@ dataset_dirs=(
 
 for IIIC_dataset in "${IIIC_datasets[@]}"; do
     for dataset_dir in "${dataset_dirs[@]}"; do
-        echo "exxact@1" | sudo -S $(which python) EEG_level_head.py \
+        sudo $(which python) EEG_level_head.py \
             --mode predict \
             --dataset ${IIIC_dataset} \
             --task_model /home/exx/Documents/EEG_report/Morgoth2/checkpoints/EEG_level_${IIIC_dataset}_3/checkpoint-best.pth \
