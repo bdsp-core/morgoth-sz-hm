@@ -21,7 +21,6 @@
 
 #--rewrite_results Overwrite the original results when new results are available.
 
-password=""
 
 # edf raw case
 dataset_dir="test_data/edf"
@@ -46,7 +45,7 @@ smooth_spike_localization_result='ema' # if not use, set ''
 PD_detection_location='both' # right | left | both
 
 # 1. IIIC-------------------------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/IIIC_sz_hm13_1.pth \
@@ -65,7 +64,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --rewrite_results ${rewrite_results}
 
 # IIIC with fs model for chewing (add refer_hm_model)
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/IIIC_sz_hm13_1.pth  \
@@ -88,7 +87,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 # 2. SPIKES--------------------------------------------------------------------------
 
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SPIKES.pth \
@@ -110,7 +109,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 3. Focal/Generalized Spikes--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/FOCGENSPIKES.pth \
@@ -130,7 +129,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 4. Slowing--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SLOWING.pth \
@@ -149,7 +148,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --rewrite_results ${rewrite_results}
 
 # 5. BS--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/BS.pth \
@@ -169,7 +168,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 6. NORMAL--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/NORMAL.pth \
@@ -188,7 +187,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --rewrite_results ${rewrite_results}
 
 # 7. SLEEP 3 stages with 19 channels --------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SLEEP.pth \
@@ -208,7 +207,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 8. SLEEP 5 stages with 6 channels --------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SLEEPPSG.pth \
@@ -229,7 +228,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 # 9. Vertex wave --------------------------------------------------------
 # option 1: run vw model and use spike results (should run spike model first, see 2.)
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
               --predict \
               --model base_patch200_200 \
               --task_model checkpoints/morgoth/VW_resampled_4.pth \
@@ -251,7 +250,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
               --rewrite_results ${rewrite_results}
 
 # option 2: run vw model and run spike model
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
               --predict \
               --model base_patch200_200 \
               --task_model checkpoints/morgoth/VW_resampled_4.pth \
@@ -274,7 +273,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 # 10. Spike localization --------------------------------------------------------
 # with single_channel mode
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --abs_pos_emb \
@@ -298,7 +297,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --need_spike_localization_1s_result ${need_spike_localization_1s_result}
 
 # with multi_channel mode
-echo "$password"  | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --abs_pos_emb \
@@ -324,7 +323,7 @@ echo "$password"  | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribut
 
 
 # 11. Sleep 6 stage (5 stage + other)--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SLEEPPSG_6class.pth \
@@ -344,7 +343,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 12. Arousal--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/SLEEPPSG_arousal.pth \
@@ -364,7 +363,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 13. BIRD--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/BIRD.pth \
@@ -383,7 +382,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --rewrite_results ${rewrite_results}
 
 # 14. BIPD--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/BIPD.pth \
@@ -402,7 +401,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
             --rewrite_results ${rewrite_results}
 
 # 15. Partial PD--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 finetune_classification.py \
             --predict \
             --model base_patch200_200 \
             --task_model checkpoints/morgoth/PD.pth \

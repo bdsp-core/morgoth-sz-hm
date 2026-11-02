@@ -28,7 +28,6 @@ RESULT_DIR="/your/results/dir"     # output: result directories will be created 
 SKIP_EVENT_LEVEL="no"
 
 # ── Shared parameters ─────────────────────────────────────────────────────────
-password=""
 data_format="edf"
 sampling_rate=0
 already_format_channel_order="no"
@@ -57,7 +56,7 @@ if [ "$SKIP_EVENT_LEVEL" = "yes" ]; then
     echo "Skipping Step 1 — using existing event-level results in: ${EVENT_RESULT_DIR}"
 else
     echo "Step 1: Running event-level inference → ${EVENT_RESULT_DIR}"
-    echo "$password" | sudo -S OMP_NUM_THREADS=1 "$(which python)" \
+    sudo OMP_NUM_THREADS=1 "$(which python)" \
         -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12345 \
         finetune_classification.py \
             --abs_pos_emb \
@@ -83,7 +82,7 @@ fi
 echo "Step 2: Running EEG-level inference for all IIIC classes..."
 for IIIC_DATASET in "${IIIC_DATASETS[@]}"; do
     echo "  → ${IIIC_DATASET}"
-    echo "$password" | sudo -S "$(which python)" EEG_level_head.py \
+    sudo "$(which python)" EEG_level_head.py \
         --mode predict \
         --dataset ${IIIC_DATASET} \
         --task_model checkpoints/${IIIC_DATASET}_EEGlevel_2.pth \
